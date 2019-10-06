@@ -48,7 +48,15 @@ public class M6_pt3_Dvaquer_binario {
 			if (!(file.exists())) {
 				file.createNewFile();
 			}
+			DataInputStream leerBinario = new DataInputStream(new FileInputStream(file));
+			byte[] array = new byte[leerBinario.available()];
+			for (int i = 0; i < array.length; i++) {
+				array[i]=leerBinario.readByte();
+			}
 			DataOutputStream escriure = new DataOutputStream(new FileOutputStream(file));
+			for (int i = 0; i < array.length; i++) {
+				escriure.writeByte(array[i]);
+			}
 			String nomCognom = "";
 //			ESCRIURE NOM
 			System.out.println("Digues el teu nom i cognom");
@@ -136,10 +144,23 @@ public class M6_pt3_Dvaquer_binario {
 				System.out.println("Suspensos: " + leerBinario.readInt());
 				System.out.println("Residencia familiar: " + leerBinario.readUTF());
 				System.out.println("Ingresos anuals familiars: " + leerBinario.readDouble());
+				contadorPersona++;
 			}
 			System.out.println("");
 		} else if (opcion == 3) {
-
+			file = new File("src\\becadades.dat");
+			File fileBackup;
+			fileBackup = new File("src\\becadadesBK.dat");
+			DataInputStream leerBinario = new DataInputStream(new FileInputStream(file));
+			byte[] array = new byte[leerBinario.available()];
+			for (int i = 0; i < array.length; i++) {
+				array[i]=leerBinario.readByte();
+			}
+			DataOutputStream escriure = new DataOutputStream(new FileOutputStream(fileBackup));
+			for (int i = 0; i < array.length; i++) {
+				escriure.writeByte(array[i]);
+			}
+			System.out.println("Backup fet!");
 		}
 		menu();
 	}
